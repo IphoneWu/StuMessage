@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hstc.edu.mapper.MarkCustomMapper" >
+    <select id="findMarkList" resultType="hstc.edu.po.MarkCustom">
+        SELECT * FROM User_Cou
+    </select>
+    <select id="findMarkListBySno" parameterType="java.lang.String" resultType="hstc.edu.po.MarkCustom">
+        SELECT * FROM User_Cou WHERE  sno=#{sno};
+    </select>
+    <insert id="addMark" parameterType="hstc.edu.po.MarkCustom">
+        INSERT User_Cou (cno,sno,mark) VALUES (#{cno},#{sno},#{mark})
+    </insert>
+    <select id="findMarkBySno_Cno" parameterType="hstc.edu.po.MarkCustom" resultType="hstc.edu.po.MarkCustom">
+        SELECT * FROM User_Cou WHERE sno=#{sno} AND cno=#{cno};
+    </select>
+    <update id="updateMark" parameterType="hstc.edu.po.MarkCustom">
+        UPDATE User_Cou SET mark=#{mark} WHERE sno=#{sno} and cno=#{cno}
+    </update>
+
+    <select id="getMarkByPage" parameterType="int" resultType="hstc.edu.po.MarkCustom">
+        select * from user_cou limit #{value1},12
+    </select>
+    <delete id="deleteMark" parameterType="hstc.edu.po.MarkCustom">
+        DELETE FROM  user_cou WHERE sno=#{sno} and cno=#{cno}
+    </delete>
+</mapper>

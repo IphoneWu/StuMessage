@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hstc.edu.mapper.StuMapper" >
+  <resultMap id="BaseResultMap" type="hstc.edu.po.Stu" >
+    <id column="sno" property="sno" jdbcType="VARCHAR" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="ssex" property="ssex" jdbcType="VARCHAR" />
+    <result column="sbirth" property="sbirth" jdbcType="DATE" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="class_1" property="class1" jdbcType="VARCHAR" />
+    <result column="college" property="college" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sno, sname, ssex, sbirth, address, class_1, college
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="hstc.edu.po.StuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from stu
+    where sno = #{sno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from stu
+    where sno = #{sno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="hstc.edu.po.StuExample" >
+    delete from stu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="hstc.edu.po.Stu" >
+    insert into stu (sno, sname, ssex, 
+      sbirth, address, class_1, 
+      college)
+    values (#{sno,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, #{ssex,jdbcType=VARCHAR}, 
+      #{sbirth,jdbcType=DATE}, #{address,jdbcType=VARCHAR}, #{class1,jdbcType=VARCHAR}, 
+      #{college,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hstc.edu.po.Stu" >
+    insert into stu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="ssex != null" >
+        ssex,
+      </if>
+      <if test="sbirth != null" >
+        sbirth,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="class1 != null" >
+        class_1,
+      </if>
+      <if test="college != null" >
+        college,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sno != null" >
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null" >
+        #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sbirth != null" >
+        #{sbirth,jdbcType=DATE},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="class1 != null" >
+        #{class1,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        #{college,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="hstc.edu.po.StuExample" resultType="java.lang.Integer" >
+    select count(*) from stu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update stu
+    <set >
+      <if test="record.sno != null" >
+        sno = #{record.sno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sname != null" >
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssex != null" >
+        ssex = #{record.ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sbirth != null" >
+        sbirth = #{record.sbirth,jdbcType=DATE},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.class1 != null" >
+        class_1 = #{record.class1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.college != null" >
+        college = #{record.college,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update stu
+    set sno = #{record.sno,jdbcType=VARCHAR},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      ssex = #{record.ssex,jdbcType=VARCHAR},
+      sbirth = #{record.sbirth,jdbcType=DATE},
+      address = #{record.address,jdbcType=VARCHAR},
+      class_1 = #{record.class1,jdbcType=VARCHAR},
+      college = #{record.college,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="hstc.edu.po.Stu" >
+    update stu
+    <set >
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null" >
+        ssex = #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sbirth != null" >
+        sbirth = #{sbirth,jdbcType=DATE},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="class1 != null" >
+        class_1 = #{class1,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null" >
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sno = #{sno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hstc.edu.po.Stu" >
+    update stu
+    set sname = #{sname,jdbcType=VARCHAR},
+      ssex = #{ssex,jdbcType=VARCHAR},
+      sbirth = #{sbirth,jdbcType=DATE},
+      address = #{address,jdbcType=VARCHAR},
+      class_1 = #{class1,jdbcType=VARCHAR},
+      college = #{college,jdbcType=VARCHAR}
+    where sno = #{sno,jdbcType=VARCHAR}
+  </update>
+</mapper>

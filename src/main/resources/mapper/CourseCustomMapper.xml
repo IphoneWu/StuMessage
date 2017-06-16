@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hstc.edu.mapper.CourseCustomMapper" >
+    <update id="updateCourse" parameterType="hstc.edu.po.CourseCustom">
+        UPDATE course SET cno=#{cno},cname=#{cname} WHERE cno=#{cno}
+    </update>
+    <select id="getCourseByPage" parameterType="int"  resultType="hstc.edu.po.Course" >
+        select * from course limit #{value1},12
+    </select>
+    <select id="findCourseByCno" parameterType="java.lang.String" resultType="hstc.edu.po.Course">
+        SELECT * FROM course WHERE cno=#{cno}
+    </select>
+</mapper>

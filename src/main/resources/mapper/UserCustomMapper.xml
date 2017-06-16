@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hstc.edu.mapper.UserCustomMapper" >
+    <select id="getUserByPage" parameterType="int" resultType="hstc.edu.po.User">
+        SELECT * FROM  user limit #{value},12
+    </select>
+    <update id="updateUser" parameterType="hstc.edu.po.User">
+        UPDATE user SET idcard=#{idcard},passowrd=#{passowrd} WHERE id=#{id}
+    </update>
+    <select id="findUserList" resultType="hstc.edu.po.User">
+        SELECT *FROM user
+    </select>
+    <select id="findUserListByIdcard" parameterType="java.lang.String" resultType="hstc.edu.po.User">
+        SELECT *FROM user WHERE idcard=#{idcard}
+    </select>
+
+    <select id="findUserByIdcard" parameterType="hstc.edu.po.User" resultType="hstc.edu.po.User">
+        SELECT *FROM user WHERE idcard=#{idcard}
+    </select>
+</mapper>
